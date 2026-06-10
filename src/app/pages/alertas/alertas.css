@@ -1,0 +1,186 @@
+.alertas {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.alertas-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.titulo {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #8892a4;
+}
+
+.resumen {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.resumen-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.resumen-badge.urgente {
+  background: #fef0f0;
+  color: #791F1F;
+}
+
+.resumen-badge.observacion {
+  background: #fff8e6;
+  color: #633806;
+}
+
+.filtros {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filtro-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #4a5568;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filtro-btn:hover {
+  background: #f5f7fa;
+}
+
+.filtro-btn.active {
+  background: #1D9E75;
+  color: white;
+  border-color: #1D9E75;
+}
+
+.alertas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alerta-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e8ecf0;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-left: 4px solid #e8ecf0;
+  flex-wrap: wrap;
+}
+
+.alerta-card.urgente {
+  border-left-color: #E24B4A;
+}
+
+.alerta-card.observacion {
+  border-left-color: #EF9F27;
+}
+
+.alerta-card.sin-cuidador {
+  border-left-color: #8892a4;
+}
+
+.alerta-indicador {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ind-urgente { background: #E24B4A; }
+.ind-observacion { background: #EF9F27; }
+.ind-sin-cuidador { background: #8892a4; }
+
+.alerta-info {
+  flex: 1;
+  min-width: 150px;
+}
+
+.alerta-nombre {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.alerta-detalle {
+  font-size: 12px;
+  color: #8892a4;
+  margin-top: 3px;
+}
+
+.alerta-dias {
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 60px;
+  text-align: center;
+}
+
+.tipo-urgente { color: #E24B4A; }
+.tipo-observacion { color: #EF9F27; }
+.tipo-sin-cuidador { color: #8892a4; }
+
+.tipo-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tipo-pill.tipo-urgente { background: #fef0f0; color: #791F1F; }
+.tipo-pill.tipo-observacion { background: #fff8e6; color: #633806; }
+.tipo-pill.tipo-sin-cuidador { background: #f0f3f7; color: #4a5568; }
+
+.btn-asignar {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #1D9E75;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-asignar:hover {
+  background: #0F6E56;
+}
+
+@media (max-width: 768px) {
+  .alertas {
+    padding: 16px;
+  }
+  .alerta-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-asignar {
+    width: 100%;
+  }
+}

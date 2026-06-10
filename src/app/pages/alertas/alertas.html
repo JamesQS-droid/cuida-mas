@@ -1,0 +1,57 @@
+<div class="alertas">
+
+  <div class="alertas-header">
+    <div class="header-info">
+      <h2 class="titulo">Panel de alertas</h2>
+      <span class="subtitle">Adultos mayores que requieren atención</span>
+    </div>
+    <div class="resumen">
+      <span class="resumen-badge urgente">🚨 2 urgentes</span>
+      <span class="resumen-badge observacion">⚠️ 2 en observación</span>
+    </div>
+  </div>
+
+  <div class="filtros">
+    <button [class.active]="filtroActivo === 'todas'"
+            (click)="setFiltro('todas')" class="filtro-btn">
+      Todas
+    </button>
+    <button [class.active]="filtroActivo === 'urgente'"
+            (click)="setFiltro('urgente')" class="filtro-btn urgente-btn">
+      🚨 Urgente
+    </button>
+    <button [class.active]="filtroActivo === 'observacion'"
+            (click)="setFiltro('observacion')" class="filtro-btn">
+      ⚠️ Observación
+    </button>
+    <button [class.active]="filtroActivo === 'sin-cuidador'"
+            (click)="setFiltro('sin-cuidador')" class="filtro-btn">
+      👤 Sin cuidador
+    </button>
+  </div>
+
+  <div class="alertas-lista">
+    @for (alerta of alertasFiltradas; track alerta.nombre) {
+      <div class="alerta-card" [class]="alerta.tipo">
+        <div class="alerta-indicador" [class]="'ind-' + alerta.tipo"></div>
+        <div class="alerta-info">
+          <div class="alerta-nombre">{{ alerta.nombre }}</div>
+          <div class="alerta-detalle">
+            {{ alerta.distrito }} · {{ alerta.edad }} años ·
+            Cuidador: {{ alerta.cuidador }}
+          </div>
+        </div>
+        <div class="alerta-dias" [class]="getTipoClass(alerta.tipo)">
+          {{ alerta.dias }} días
+        </div>
+        <span class="tipo-pill" [class]="getTipoClass(alerta.tipo)">
+          {{ getTipoLabel(alerta.tipo) }}
+        </span>
+        <button class="btn-asignar" (click)="asignarVisita(alerta.nombre)">
+          Asignar visita
+        </button>
+      </div>
+    }
+  </div>
+
+</div>

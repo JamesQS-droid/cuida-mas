@@ -1,0 +1,91 @@
+<div class="registro">
+  <div class="form-card">
+
+    <div class="form-section">
+      <div class="section-title">
+        <span class="section-num">1</span>
+        Datos personales
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Nombres <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="form.nombres" placeholder="Ej: María Elena" />
+        </div>
+        <div class="field">
+          <label>Apellidos <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="form.apellidos" placeholder="Ej: Condori Quispe" />
+        </div>
+        <div class="field">
+          <label>DNI <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="form.dni" placeholder="00000000" maxlength="8" />
+        </div>
+        <div class="field">
+          <label>Edad <span class="req">*</span></label>
+          <input type="number" [(ngModel)]="form.edad" placeholder="Ej: 72" min="60" max="120" />
+        </div>
+        <div class="field">
+          <label>Sexo</label>
+          <select [(ngModel)]="form.sexo">
+            <option value="">Seleccionar</option>
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Distrito <span class="req">*</span></label>
+          <select [(ngModel)]="form.distrito">
+            <option value="">Seleccionar</option>
+            <option value="Huancayo">Huancayo</option>
+            <option value="El Tambo">El Tambo</option>
+            <option value="Chilca">Chilca</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="section-title">
+        <span class="section-num">2</span>
+        Estado de salud
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Condición actual <span class="req">*</span></label>
+          <select [(ngModel)]="form.condicion">
+            <option value="">Seleccionar</option>
+            <option value="Estable">Estable</option>
+            <option value="Observación">Observación</option>
+            <option value="Urgente">Urgente</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Enfermedades crónicas</label>
+          <input type="text" [(ngModel)]="form.enfermedades" placeholder="Ej: diabetes, hipertensión" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="section-title">
+        <span class="section-num">3</span>
+        Contacto familiar
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Familiar responsable</label>
+          <input type="text" [(ngModel)]="form.familiar" placeholder="Nombre completo" />
+        </div>
+        <div class="field">
+          <label>Teléfono de emergencia</label>
+          <input type="text" [(ngModel)]="form.telefono" placeholder="+51 9XX XXX XXX" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancel" (click)="cancelar()">Cancelar</button>
+      <button class="btn-save" (click)="guardar()">Guardar registro</button>
+    </div>
+
+  </div>
+</div>

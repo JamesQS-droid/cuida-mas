@@ -1,0 +1,64 @@
+<div class="dashboard">
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon" style="background:#e8f5f0">👥</div>
+      <div class="metric-info">
+        <span class="metric-label">Total registrados</span>
+        <span class="metric-val">124</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:#e8f5f0">✅</div>
+      <div class="metric-info">
+        <span class="metric-label">Estables</span>
+        <span class="metric-val green">89</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:#fff8e6">⚠️</div>
+      <div class="metric-info">
+        <span class="metric-label">En observación</span>
+        <span class="metric-val amber">32</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:#fef0f0">🚨</div>
+      <div class="metric-info">
+        <span class="metric-label">Urgentes</span>
+        <span class="metric-val red">3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <h2 class="section-title">Adultos mayores recientes</h2>
+    <a routerLink="/registro" class="btn-add">+ Nuevo registro</a>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Distrito</th>
+          <th>Cuidador</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (adulto of adultos; track adulto.nombre) {
+          <tr>
+            <td>{{ adulto.nombre }}</td>
+            <td>{{ adulto.edad }}</td>
+            <td>{{ adulto.distrito }}</td>
+            <td>{{ adulto.cuidador }}</td>
+            <td><span class="pill" [class]="getEstadoClass(adulto.estado)">{{ adulto.estado }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>

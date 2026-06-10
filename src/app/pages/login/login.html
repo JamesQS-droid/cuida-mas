@@ -1,0 +1,72 @@
+<div class="login-page">
+  <div class="login-left">
+    <div class="brand">
+      <div class="brand-logo">CM</div>
+      <div class="brand-info">
+        <h1 class="brand-name">CuidaMás</h1>
+        <p class="brand-sub">Sistema de monitoreo de adultos mayores</p>
+      </div>
+    </div>
+    <div class="login-card">
+      <h2 class="card-title">Iniciar sesión</h2>
+      <p class="card-sub">Ingresa tus credenciales para continuar</p>
+
+      @if (error) {
+        <div class="error-box">⚠️ {{ error }}</div>
+      }
+
+      <div class="field">
+        <label>Correo electrónico</label>
+        <input
+          type="email"
+          [(ngModel)]="form.email"
+          placeholder="correo@cuidamas.pe"
+          (keyup.enter)="ingresar()"
+        />
+      </div>
+
+      <div class="field">
+        <label>Contraseña</label>
+        <input
+          type="password"
+          [(ngModel)]="form.password"
+          placeholder="••••••••"
+          (keyup.enter)="ingresar()"
+        />
+      </div>
+
+      <button class="btn-ingresar" (click)="ingresar()" [disabled]="cargando">
+        {{ cargando ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+
+      <div class="credenciales-demo">
+        <p class="demo-title">Credenciales de prueba:</p>
+        <p class="demo-item">📧 admin&#64;cuidamas.pe / 🔑 1234</p>
+        <p class="demo-item">📧 cuidador&#64;cuidamas.pe / 🔑 1234</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="right-content">
+      <div class="stat-cards">
+        <div class="stat-card">
+          <span class="stat-num">124</span>
+          <span class="stat-label">Adultos registrados</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">89</span>
+          <span class="stat-label">En estado estable</span>
+        </div>
+        <div class="stat-card urgent">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Casos urgentes</span>
+        </div>
+      </div>
+      <div class="right-text">
+        <h2>Monitoreamos el bienestar de los adultos mayores de Huancayo</h2>
+        <p>Plataforma digital para cuidadores, voluntarios y el CIAM — seguimiento en tiempo real, alertas automáticas y mapa interactivo.</p>
+      </div>
+    </div>
+  </div>
+</div>
