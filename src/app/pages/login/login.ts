@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,7 @@ export class Login {
   error = '';
   cargando = false;
 
-  // Usuarios mock
-  usuarios = [
-    { email: 'admin@cuidamas.pe', password: '1234', nombre: 'James Quispe', rol: 'Administrador' },
-    { email: 'cuidador@cuidamas.pe', password: '1234', nombre: 'Ana López', rol: 'Cuidadora' },
-  ];
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, private api: ApiService) {}
 
   ingresar() {
     this.error = '';
@@ -32,17 +27,17 @@ export class Login {
       return;
     }
     this.cargando = true;
-    setTimeout(() => {
-      const usuario = this.usuarios.find(
-        u => u.email === this.form.email && u.password === this.form.password
-      );
-      if (usuario) {
-        localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    this.api.login(this.form.email, this.form.password).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('usuario', JSON.stringify(res.usuario));
         this.router.navigate(['/dashboard']);
-      } else {
-        this.error = 'Correo o contraseña incorrectos.';
+      },
+      error: (err: any) => {
+        this.error = err.error?.error || 'Correo o contraseña incorrectos.';
         this.cargando = false;
       }
-    }, 800);
+    });
   }
 }

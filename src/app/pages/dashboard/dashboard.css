@@ -141,3 +141,10 @@
     font-size: 22px;
   }
 }
+.sin-datos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 0;
+}
