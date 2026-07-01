@@ -108,13 +108,14 @@ export class Mapa implements AfterViewInit, OnDestroy {
       });
 
       const popup = `
-        <div style="font-family:sans-serif;min-width:160px">
+          <div style="font-family:sans-serif;min-width:180px">
+           ${adulto.foto ? `<img src="${adulto.foto}" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px;" />` : ''}
           <div style="font-weight:600;font-size:14px;margin-bottom:6px">${adulto.nombre}</div>
           <div style="font-size:12px;color:#666;margin-bottom:2px">📍 ${adulto.distrito}</div>
           <div style="font-size:12px;color:#666;margin-bottom:2px">🎂 ${adulto.edad} años</div>
           <div style="font-size:12px;color:#666;margin-bottom:6px">👤 ${adulto.cuidador_nombre || '—'}</div>
-          <span style="padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;background:${color}22;color:${color}">${label}</span>
-        </div>`;
+        <span style="padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;background:${color}22;color:${color}">${label}</span>
+    </div>`;
 
       L.marker([lat, lng], { icon: icono })
         .addTo(this.map)

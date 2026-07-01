@@ -41,6 +41,56 @@
           </select>
         </div>
       </div>
+
+      <!-- GPS -->
+      <div class="gps-section">
+        <div class="gps-header">
+          <span class="gps-label">📍 Geolocalización GPS</span>
+          <button class="btn-gps" (click)="obtenerUbicacion()"
+                  [disabled]="gpsEstado === 'cargando'">
+            @if (gpsEstado === 'cargando') { Obteniendo... }
+            @else if (gpsEstado === 'ok') { ✅ Actualizar ubicación }
+            @else { Usar mi ubicación actual }
+          </button>
+        </div>
+        @if (gpsEstado === 'ok' && lat && lng) {
+          <div class="gps-coords">
+            ✅ Ubicación capturada — Lat: {{ lat | number:'1.4-6' }}, Lng: {{ lng | number:'1.4-6' }}
+          </div>
+        }
+        @if (gpsEstado === 'error') {
+          <div class="gps-error">❌ No se pudo obtener la ubicación</div>
+        }
+      </div>
+
+      <!-- FOTO / CÁMARA -->
+      <div class="foto-section">
+        <span class="gps-label">📷 Fotografía del adulto mayor</span>
+
+        @if (!fotoPreview && !camaraActiva) {
+          <button class="btn-camara" (click)="abrirCamara()">
+            Activar cámara
+          </button>
+        }
+
+        @if (camaraActiva) {
+          <div class="camara-container">
+            <video id="camara-video" autoplay playsinline
+                   style="width:100%;max-width:400px;border-radius:8px;"></video>
+            <div class="camara-acciones">
+              <button class="btn-foto" (click)="tomarFoto()">📸 Tomar foto</button>
+              <button class="btn-cancel-cam" (click)="cerrarCamara()">Cancelar</button>
+            </div>
+          </div>
+        }
+
+        @if (fotoPreview) {
+          <div class="foto-preview-container">
+            <img [src]="fotoPreview" class="foto-preview" alt="Foto del adulto mayor" />
+            <button class="btn-eliminar-foto" (click)="eliminarFoto()">🗑 Eliminar foto</button>
+          </div>
+        }
+      </div>
     </div>
 
     <div class="form-section">
@@ -60,7 +110,8 @@
         </div>
         <div class="field full">
           <label>Enfermedades crónicas</label>
-          <input type="text" [(ngModel)]="form.enfermedades" placeholder="Ej: diabetes, hipertensión" />
+          <input type="text" [(ngModel)]="form.enfermedades"
+                 placeholder="Ej: diabetes, hipertensión" />
         </div>
       </div>
     </div>
@@ -84,7 +135,9 @@
 
     <div class="form-actions">
       <button class="btn-cancel" (click)="cancelar()">Cancelar</button>
-      <button class="btn-save" (click)="guardar()">Guardar registro</button>
+      <button class="btn-save" (click)="guardar()" [disabled]="guardando">
+        @if (guardando) { Guardando... } @else { Guardar registro }
+      </button>
     </div>
 
   </div>

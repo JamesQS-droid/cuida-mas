@@ -50,6 +50,7 @@
         <table class="tabla">
           <thead>
             <tr>
+              <th>Foto</th>
               <th>Nombre</th>
               <th>Edad</th>
               <th>Distrito</th>
@@ -60,6 +61,14 @@
           <tbody>
             @for (adulto of adultos; track adulto.id) {
               <tr>
+                <td>
+                  @if (adulto.foto) {
+                    <img [src]="adulto.foto"
+                         style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #e8ecf0;" />
+                  } @else {
+                    <div style="width:40px;height:40px;border-radius:50%;background:#e8ecf0;display:flex;align-items:center;justify-content:center;font-size:16px;">👤</div>
+                  }
+                </td>
                 <td>{{ adulto.nombre }}</td>
                 <td>{{ adulto.edad }}</td>
                 <td>{{ adulto.distrito }}</td>

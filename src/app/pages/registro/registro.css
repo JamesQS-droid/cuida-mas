@@ -89,6 +89,150 @@ input::placeholder {
   color: #b0bac9;
 }
 
+/* ─── GPS ─────────────────────────────────── */
+.gps-section {
+  background: #f0faf5;
+  border: 1px solid #b7e5d0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gps-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gps-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.btn-gps {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #1D9E75;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-gps:hover { background: #0F6E56; }
+.btn-gps:disabled { background: #9FE1CB; cursor: not-allowed; }
+
+.gps-coords {
+  font-size: 12px;
+  color: #0F6E56;
+  background: #e1f5ee;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.gps-error {
+  font-size: 12px;
+  color: #E24B4A;
+}
+
+/* ─── FOTO / CÁMARA ───────────────────────── */
+.foto-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-camara {
+  padding: 10px 20px;
+  border: 2px dashed #1D9E75;
+  border-radius: 8px;
+  background: white;
+  color: #1D9E75;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+
+.btn-camara:hover {
+  background: #f0faf5;
+}
+
+.camara-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.camara-acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-foto {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1D9E75;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-foto:hover { background: #0F6E56; }
+
+.btn-cancel-cam {
+  padding: 10px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  color: #4a5568;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.foto-preview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.foto-preview {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #1D9E75;
+}
+
+.btn-eliminar-foto {
+  padding: 6px 14px;
+  border: 1px solid #E24B4A;
+  border-radius: 6px;
+  background: white;
+  color: #E24B4A;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-eliminar-foto:hover { background: #fff0f0; }
+
+/* ─── ACCIONES ────────────────────────────── */
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -118,21 +262,14 @@ input::placeholder {
   cursor: pointer;
 }
 
-.btn-save:hover {
-  background: #0F6E56;
-}
+.btn-save:hover { background: #0F6E56; }
+.btn-save:disabled { background: #9FE1CB; cursor: not-allowed; }
 
+/* ─── RESPONSIVE ──────────────────────────── */
 @media (max-width: 768px) {
-  .registro {
-    padding: 16px;
-  }
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-  .form-actions {
-    flex-direction: column;
-  }
-  .btn-cancel, .btn-save {
-    width: 100%;
-  }
+  .registro { padding: 16px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-actions { flex-direction: column; }
+  .btn-cancel, .btn-save { width: 100%; }
+  .gps-header { flex-direction: column; align-items: flex-start; }
 }
