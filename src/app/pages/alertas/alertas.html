@@ -6,10 +6,9 @@
       <span class="subtitle">Adultos mayores que requieren atención</span>
     </div>
     <div class="resumen">
-      <span class="resumen-badge urgente">🚨 2 urgentes</span>
-      <span class="resumen-badge observacion">⚠️ 2 en observación</span>
-    </div>
-  </div>
+  <span class="resumen-badge urgente">🚨 {{ urgentes }} urgentes</span>
+  <span class="resumen-badge observacion">⚠️ {{ enObservacion }} en observación</span>
+</div>
 
   <div class="filtros">
     <button [class.active]="filtroActivo === 'todas'"
@@ -30,28 +29,38 @@
     </button>
   </div>
 
-  <div class="alertas-lista">
-    @for (alerta of alertasFiltradas; track alerta.nombre) {
-      <div class="alerta-card" [class]="alerta.tipo">
-        <div class="alerta-indicador" [class]="'ind-' + alerta.tipo"></div>
-        <div class="alerta-info">
-          <div class="alerta-nombre">{{ alerta.nombre }}</div>
-          <div class="alerta-detalle">
-            {{ alerta.distrito }} · {{ alerta.edad }} años ·
-            Cuidador: {{ alerta.cuidador }}
+  @if (cargando) {
+    <div class="cargando">Cargando alertas...</div>
+  } @else if (alertasFiltradas.length === 0) {
+    <div class="sin-datos">
+      <p>No hay alertas en esta categoría.</p>
+    </div>
+  } @else {
+    <div class="alertas-lista">
+      @for (alerta of alertasFiltradas; track alerta.nombre) {
+        <div class="alerta-card" [class]="alerta.tipo || alerta.condicion">
+          <div class="alerta-indicador" [class]="'ind-' + (alerta.tipo || alerta.condicion)"></div>
+          <div class="alerta-info">
+            <div class="alerta-nombre">{{ alerta.nombre || alerta.adulto_nombre }}</div>
+            <div class="alerta-detalle">
+              {{ alerta.distrito }} · {{ alerta.edad }} años ·
+              Cuidador: {{ alerta.cuidador || alerta.cuidador_nombre || '—' }}
+            </div>
           </div>
+          @if (alerta.dias) {
+            <div class="alerta-dias" [class]="getTipoClass(alerta)">
+              {{ alerta.dias }} días
+            </div>
+          }
+          <span class="tipo-pill" [class]="getTipoClass(alerta)">
+            {{ getTipoLabel(alerta) }}
+          </span>
+          <button class="btn-asignar" (click)="asignarVisita(alerta.nombre || alerta.adulto_nombre)">
+            Asignar visita
+          </button>
         </div>
-        <div class="alerta-dias" [class]="getTipoClass(alerta.tipo)">
-          {{ alerta.dias }} días
-        </div>
-        <span class="tipo-pill" [class]="getTipoClass(alerta.tipo)">
-          {{ getTipoLabel(alerta.tipo) }}
-        </span>
-        <button class="btn-asignar" (click)="asignarVisita(alerta.nombre)">
-          Asignar visita
-        </button>
-      </div>
-    }
-  </div>
+      }
+    </div>
+  }
 
 </div>

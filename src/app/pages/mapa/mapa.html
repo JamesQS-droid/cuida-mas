@@ -2,7 +2,7 @@
 
   <div class="mapa-header">
     <div>
-      <h2 class="titulo">Mapa interactivo</h2>
+      <h2 class="titulo">Mapa de Huancayo</h2>
       <span class="subtitle">Distribución geográfica — Huancayo, El Tambo, Chilca</span>
     </div>
     <div class="leyenda">
@@ -18,8 +18,51 @@
     </div>
   </div>
 
-  <div class="mapa-container">
+  <div class="mapa-body">
     <div id="mapa-leaflet"></div>
+
+    <div class="mapa-sidebar">
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">ESTADO</h4>
+        <div class="stat-row">
+          <span class="dot" style="background:#1D9E75"></span>
+          <span class="stat-label">Estable</span>
+          <span class="stat-val green">{{ estable }}</span>
+        </div>
+        <div class="stat-row">
+          <span class="dot" style="background:#EF9F27"></span>
+          <span class="stat-label">Observación</span>
+          <span class="stat-val amber">{{ observacion }}</span>
+        </div>
+        <div class="stat-row">
+          <span class="dot" style="background:#E24B4A"></span>
+          <span class="stat-label">Urgente</span>
+          <span class="stat-val red">{{ urgente }}</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">DISTRITO</h4>
+        <div class="stat-row">
+          <span class="stat-label">Huancayo</span>
+          <span class="stat-val">{{ huancayo }}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">El Tambo</span>
+          <span class="stat-val">{{ elTambo }}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Chilca</span>
+          <span class="stat-val">{{ chilca }}</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">TOTAL</h4>
+        <div class="stat-total">{{ total }}</div>
+        <div class="stat-label">adultos registrados</div>
+      </div>
+    </div>
   </div>
 
 </div>

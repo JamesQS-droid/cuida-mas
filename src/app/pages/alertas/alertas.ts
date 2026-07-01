@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-alertas',
@@ -8,20 +9,49 @@ import { CommonModule } from '@angular/common';
   templateUrl: './alertas.html',
   styleUrl: './alertas.css'
 })
-export class Alertas {
+export class Alertas implements OnInit {
   filtroActivo = 'todas';
+  alertas: any[] = [];
+  cargando = true;
 
-  alertas = [
-    { nombre: 'Felipe Huamán', edad: 81, distrito: 'El Tambo', cuidador: '—', dias: 13, tipo: 'urgente' },
-    { nombre: 'Juana Ramos', edad: 83, distrito: 'Chilca', cuidador: '—', dias: 11, tipo: 'urgente' },
-    { nombre: 'Rosa Ccanto', edad: 68, distrito: 'Chilca', cuidador: 'Luis Ríos', dias: 8, tipo: 'observacion' },
-    { nombre: 'Pedro Solano', edad: 77, distrito: 'Huancayo', cuidador: 'Ana López', dias: 7, tipo: 'observacion' },
-    { nombre: 'Carlos Quispe', edad: 70, distrito: 'El Tambo', cuidador: '—', dias: 5, tipo: 'sin-cuidador' },
-  ];
+  get urgentes() {
+  return this.alertas.filter(a => (a.tipo || a.condicion) === 'urgente').length;
+}
 
+get enObservacion() {
+  return this.alertas.filter(a => (a.tipo || a.condicion) === 'observacion').length;
+}
+
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {}
+
+ngOnInit() {
+  this.api.getAdultos().subscribe({
+    next: (adultos: any[]) => {
+      this.alertas = adultos
+        .filter(a => a.condicion === 'urgente' || a.condicion === 'observacion')
+        .map(a => ({
+          nombre: a.nombre,
+          edad: a.edad,
+          distrito: a.distrito,
+          cuidador: a.cuidador_nombre || '—',
+          dias: 0,
+          tipo: a.condicion,
+          condicion: a.condicion
+        }));
+      this.cargando = false;
+      this.cdr.detectChanges();
+    },
+    error: () => {
+      this.cargando = false;
+      this.cdr.detectChanges();
+    }
+  });
+}
   get alertasFiltradas() {
     if (this.filtroActivo === 'todas') return this.alertas;
-    return this.alertas.filter(a => a.tipo === this.filtroActivo);
+    if (this.filtroActivo === 'sin-cuidador')
+      return this.alertas.filter(a => !a.cuidador || a.cuidador === '—');
+    return this.alertas.filter(a => a.tipo === this.filtroActivo || a.condicion === this.filtroActivo);
   }
 
   setFiltro(filtro: string) {
@@ -32,13 +62,15 @@ export class Alertas {
     alert(`✅ Visita asignada para ${nombre}`);
   }
 
-  getTipoLabel(tipo: string): string {
+  getTipoLabel(alerta: any): string {
+    const tipo = alerta.tipo || alerta.condicion;
     if (tipo === 'urgente') return 'Urgente';
     if (tipo === 'observacion') return 'Observación';
     return 'Sin cuidador';
   }
 
-  getTipoClass(tipo: string): string {
+  getTipoClass(alerta: any): string {
+    const tipo = alerta.tipo || alerta.condicion;
     if (tipo === 'urgente') return 'tipo-urgente';
     if (tipo === 'observacion') return 'tipo-observacion';
     return 'tipo-sin-cuidador';
